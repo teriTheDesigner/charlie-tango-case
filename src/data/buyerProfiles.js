@@ -92,7 +92,7 @@ export function generateBuyerProfiles({
   maxResults = 20,
 } = {}) {
   if (!zipCode) return [];
-  faker.seed(zipCode);
+  faker.seed(Number(zipCode));
 
   return Array.from(
     {
