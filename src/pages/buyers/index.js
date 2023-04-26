@@ -28,46 +28,53 @@ export default function Buyers() {
       <Head>
         <title>Find buyer | EDC</title>
       </Head>
-      <div className="wrapper">
+      <div className={`wrapper ${styles.cardPageLayout}`}>
         <h1 className={styles.headline}>Potential buyers</h1>
 
         {buyers.map((buyer) => (
-          <p key={buyer.id}>{buyer.description}</p>
+          <div key={buyer.id} className={styles.card}>
+            <input type="checkbox" className={styles.checkbox}></input>
+            <div className={styles.card_content}>
+              <p>Buyer's ID</p>
+              <p>{buyer.id}</p>
+            </div>
+            <div className={styles.card_content}>
+              <p>Estate Type</p>
+              <p>{buyer.estateType}</p>
+            </div>
+            <div className={styles.card_content}>
+              <p>Takeover Date</p>
+              <p>{buyer.takeoverDate}</p>
+            </div>
+            <div className={styles.card_content}>
+              <p>Adults</p>
+              <p>{buyer.adults}</p>
+            </div>
+            <div className={styles.card_content}>
+              <p>Children</p>
+              <p>{buyer.children}</p>
+            </div>
+            <div className={styles.card_content}>
+              <p>Min Size</p>
+              <p>{buyer.minSize}</p>
+            </div>
+            <div className={styles.card_content}>
+              <p>Max Price</p>
+              <p>{buyer.maxPrice}</p>
+            </div>
+            <div>
+              <p>Description</p>
+              <p>{buyer.description}</p>
+            </div>
+          </div>
         ))}
-        <p>
-          On this page you get the <code>`query`</code> params like{" "}
-          <code>`zipCode`</code>, and can use them to fetch a list of buyers
-          from the API.
-        </p>
-        <p>
-          Make sure to read the docs on how to fetch data on a page - There are
-          multiple ways of doing it, and you should choose the one that fits
-          your solution best.
-        </p>
-        <ul>
-          <li>
-            <a
-              href="https://nextjs.org/docs/basic-features/data-fetching/get-server-side-props"
-              target="_blank"
-            >
-              next.js - Data fetching
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://react.dev/learn/synchronizing-with-effects#fetching-data"
-              target="_blank"
-            >
-              react.dev - Fetching data
-            </a>
-          </li>
-        </ul>
-        <div className={styles.content}>
+
+        {/*  <div className={styles.content}>
           <h2>Query params:</h2>
           <pre>
             <code>{JSON.stringify(query, null, 2)}</code>
           </pre>
-        </div>
+        </div> */}
       </div>
     </>
   );
