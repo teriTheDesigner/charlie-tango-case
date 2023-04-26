@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { generateBuyerProfiles } from "@/data/buyerProfiles";
+import { estateTypes } from "@/data/estateTypes";
 
 export default function BuyersPage({ initialProfiles }) {
   const [profiles, setProfiles] = useState(initialProfiles);
@@ -9,8 +10,14 @@ export default function BuyersPage({ initialProfiles }) {
     const zipCode = e.target.zipCode.value;
     const price = e.target.price.value;
     const size = e.target.size.value;
+    const estateType = e.target.estateType.value;
 
-    const newProfiles = generateBuyerProfiles({ zipCode, price, size });
+    const newProfiles = generateBuyerProfiles({
+      zipCode,
+      price,
+      size,
+      estateType,
+    });
     setProfiles(newProfiles);
   };
 
@@ -25,6 +32,15 @@ export default function BuyersPage({ initialProfiles }) {
 
         <label htmlFor="size">Size:</label>
         <input type="number" name="size" required />
+
+        <label htmlFor="estateType">Estate Type:</label>
+        <select name="estateType" required>
+          {estateTypes.map((estateType) => (
+            <option key={estateType.id} value={estateType.id}>
+              {estateType.name}
+            </option>
+          ))}
+        </select>
 
         <button type="submit">Search</button>
       </form>
@@ -41,8 +57,13 @@ export default function BuyersPage({ initialProfiles }) {
 }
 
 export async function getServerSideProps(context) {
-  const { zipCode, price, size } = context.query;
-  const initialProfiles = generateBuyerProfiles({ zipCode, price, size });
+  const { zipCode, price, size, estateType } = context.query;
+  const initialProfiles = generateBuyerProfiles({
+    zipCode,
+    price,
+    size,
+    estateType,
+  });
 
   return {
     props: {

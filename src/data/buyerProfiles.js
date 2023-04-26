@@ -84,10 +84,32 @@ export function generateBuyerProfile({ price = 5000000, size = 100 } = {}) {
  * @param maxResults? {number} Maximum number of profiles to generate
  * @returns {{ maxPrice: number, estateType: string, takeoverDate: string, children: number, adults: number, description: string, minSize: number, id: string}[]}
  */
+// export function generateBuyerProfiles({
+//   zipCode,
+//   price = undefined,
+//   size = undefined,
+//   minResults = 0,
+//   maxResults = 20,
+// } = {}) {
+//   if (!zipCode) return [];
+//   faker.seed(Number(zipCode));
+
+//   return Array.from(
+//     {
+//       length: faker.datatype.number({
+//         min: minResults,
+//         max: maxResults,
+//       }),
+//     },
+//     () => generateBuyerProfile({ price, size })
+//   );
+// }
+
 export function generateBuyerProfiles({
   zipCode,
   price = undefined,
   size = undefined,
+  estateType = undefined,
   minResults = 0,
   maxResults = 20,
 } = {}) {
@@ -102,5 +124,10 @@ export function generateBuyerProfiles({
       }),
     },
     () => generateBuyerProfile({ price, size })
-  );
+  ).filter((profile) => {
+    if (estateType && profile.estateType !== estateType) {
+      return false;
+    }
+    return true;
+  });
 }
