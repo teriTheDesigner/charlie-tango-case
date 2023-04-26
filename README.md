@@ -265,3 +265,5 @@ All the colors used in the EDC design system are available as CSS variables in
   other elements that need to stand out.
 
 Make sure to keep your color combinations contrast accessible.
+
+ignore this comment-Orestis
