@@ -2,21 +2,25 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import styles from "./Buyers.module.css";
 import { useState, useEffect } from "react";
+import { estateTypes } from "@/data/estateTypes";
 
 export default function Buyers() {
   const { query } = useRouter();
   const [buyers, setBuyers] = useState([]);
 
   useEffect(() => {
-    // Check if zipCode exists in the query
-
     fetch(
-      `/api/find-buyers?price=${query.price}&size=${query.size}&zipCode=${query.zipCode}&estate_type=${query.estate_type}`
+      `/api/find-buyers?price=${query.price}&size=${query.size}&zipCode=${query.zipCode}&estateType=${query.estateType}`
     )
       .then((res) => res.json())
       .then((data) => setBuyers(data));
   }, [query]);
 
+  function getEstateTypeName(id) {
+    //goes through the object and returns the first element in the provided array
+    const estateTypeName = estateTypes.find((x) => x.id === id);
+    return estateTypeName ? estateTypeName.name : null;
+  }
   console.log({ buyers });
   return (
     <>
@@ -40,7 +44,7 @@ export default function Buyers() {
               </div>
               <div className={styles.card_content}>
                 <p>Estate Type</p>
-                <p>{buyer.estateType}</p>
+                <p>{getEstateTypeName(buyer.estateType)}</p>
               </div>
               <div className={styles.card_content}>
                 <p>Takeover Date</p>
@@ -55,7 +59,7 @@ export default function Buyers() {
                 <p>{buyer.children}</p>
               </div>
               <div className={styles.card_content}>
-                <p>Min Size</p>
+                <p className={styles.icon}>Min Size</p>
                 <p>{buyer.minSize}</p>
               </div>
               <div className={styles.card_content}>
@@ -68,7 +72,7 @@ export default function Buyers() {
               </div>
             </div>
           ))}
-          <button>Page 3</button>
+          <button>Continue</button>
         </form>
         <div className={styles.content}>
           <h2>Query params:</h2>

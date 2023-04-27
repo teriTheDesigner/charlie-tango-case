@@ -29,6 +29,12 @@
   grid-template-columns: 1fr 1fr;
 }
 
+.icon::before {
+  content: url("../../assets/icon-min-area.svg");
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+
 .checkbox {
   display: block;
   align-self: flex-end;
