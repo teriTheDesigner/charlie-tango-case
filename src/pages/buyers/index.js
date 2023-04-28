@@ -7,14 +7,23 @@ import { estateTypes } from "@/data/estateTypes";
 export default function Buyers() {
   const { query } = useRouter();
   const [buyers, setBuyers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     fetch(
       `/api/find-buyers?price=${query.price}&size=${query.size}&zipCode=${query.zipCode}&estateType=${query.estateType}`
     )
       .then((res) => res.json())
-      .then((data) => setBuyers(data));
+      .then((data) => {
+        setBuyers(data);
+        setLoading(false);
+      });
   }, [query]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   function getEstateTypeName(id) {
     //goes through the object and returns the first element in the provided array
@@ -27,15 +36,16 @@ export default function Buyers() {
       <Head>
         <title>Find buyer | EDC</title>
       </Head>
-      <div className={`wrapper ${styles.cardPageLayout}`}>
+      <div className={`wrapper`}>
         <h1 className={styles.headline}>Potential buyers</h1>
-        <form action="/contact" method="GET">
+        <form action="/contact" method="GET" className={styles.cardPageLayout}>
+          {/* <input name="price" value={query.price} type="hidden" /> */}
           {buyers.map((buyer) => (
             <div key={buyer.id} className={styles.card}>
               <input
                 type="checkbox"
-                name="id[]"
-                value={buyer.id}
+                name="id"
+                value={JSON.stringify(buyer)}
                 className={styles.checkbox}
               ></input>
               <div className={styles.card_content}>
@@ -74,12 +84,12 @@ export default function Buyers() {
           ))}
           <button>Continue</button>
         </form>
-        <div className={styles.content}>
+        {/*  <div className={styles.content}>
           <h2>Query params:</h2>
           <pre>
             <code>{JSON.stringify(query, null, 2)}</code>
           </pre>
-        </div>
+        </div> */}
       </div>
     </>
   );
