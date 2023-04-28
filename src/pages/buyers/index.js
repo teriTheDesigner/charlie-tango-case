@@ -7,14 +7,23 @@ import { estateTypes } from "@/data/estateTypes";
 export default function Buyers() {
   const { query } = useRouter();
   const [buyers, setBuyers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     fetch(
       `/api/find-buyers?price=${query.price}&size=${query.size}&zipCode=${query.zipCode}&estateType=${query.estateType}`
     )
       .then((res) => res.json())
-      .then((data) => setBuyers(data));
+      .then((data) => {
+        setBuyers(data);
+        setLoading(false);
+      });
   }, [query]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   function getEstateTypeName(id) {
     //goes through the object and returns the first element in the provided array
