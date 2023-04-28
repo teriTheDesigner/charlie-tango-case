@@ -1,6 +1,6 @@
 import Head from "next/head";
 import styles from "./Home.module.css";
-import IndexForm from "@/components/Header/indexForm";
+import IndexForm from "@/components/IndexForm";
 
 export default function Home() {
   return (
