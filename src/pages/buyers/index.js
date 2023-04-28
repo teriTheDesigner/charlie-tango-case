@@ -39,7 +39,10 @@ export default function Buyers() {
       <div className={`wrapper`}>
         <h1 className={styles.headline}>Potential buyers</h1>
         <form action="/contact" method="GET" className={styles.cardPageLayout}>
-          {/* <input name="price" value={query.price} type="hidden" /> */}
+          <input name="price" value={query.price} type="hidden" />
+          <input name="estate_type" value={query.estateType} type="hidden" />
+          <input name="size" value={query.size} type="hidden" />
+          <input name="zipcode" value={query.zipCode} type="hidden" />
           {buyers.map((buyer) => (
             <div key={buyer.id} className={styles.card}>
               <input
