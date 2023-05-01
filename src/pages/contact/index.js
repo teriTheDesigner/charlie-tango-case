@@ -1,15 +1,36 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "./Contact.module.css";
-import { createClient } from "@supabase/supabase-js";
-
+// import { createClient } from "@supabase/supabase-js";
 export default function Contact() {
+  const formEl = useRef(null);
   const { query } = useRouter();
+  function submitted(e) {
+    e.preventDefault();
+    console.log({ buyers });
+    const payload = {
+      name: e.target.name.value,
+      email: e.target.email.value,
+      phone: e.target.phone.value,
+      price: query.price,
+      estateType: query.estate_type,
+      size: query.size,
+      zipCode: query.zipcode,
+      buyers: buyers,
+    };
+    fetch("/api/addSellers", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  }
 
   console.log({ query });
-  // const buyers = query.id ? query.id.map(JSON.parse) : [];
-  // _______________________1_
 
   const [buyers, setBuyers] = useState([]);
   useEffect(() => {
@@ -42,7 +63,11 @@ export default function Contact() {
               </li>
             ))}
           </ul>
-          <form className={styles.contactForm}>
+          <form
+            className={styles.contactForm}
+            ref={formEl}
+            onSubmit={submitted}
+          >
             <label>
               Name
               <input type="text" name="name" required />
