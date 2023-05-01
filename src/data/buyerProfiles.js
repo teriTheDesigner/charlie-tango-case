@@ -25,6 +25,9 @@ export function generateBuyerProfile({
   // Set the end date to 3 months from now.
   endDate.setMonth(endDate.getMonth() + 3);
 
+  console.log("estateType:", estateType);
+  console.log("estateTypes:", estateTypes);
+
   const result = {
     id: faker.datatype.uuid().split("-")[0],
     /** Maximum price in kr */
@@ -43,7 +46,11 @@ export function generateBuyerProfile({
     children: faker.datatype.number({ min: 0, max: 5 }),
     description: "",
     /** The type of estate the buyer is looking for. This is just the ID, so we can find the value in `estateTypes.js` */
-    estateType: estateTypes[estateType].id,
+    // estateType: estateTypes[estateType].id,
+    // ________________________________1_
+    estateType: estateTypes[estateType] ? estateTypes[estateType].id : null,
+    // ________________________________1_
+
     takeoverDate: faker.date
       .between(today, endDate)
       .toISOString()
@@ -65,14 +72,24 @@ export function generateBuyerProfile({
     }
   }
 
+  // result.description = `${familyName} is looking for a ${
+  //   estateTypes.find((item) => item.id === result.estateType).name
+  // } with a minimum size of ${
+  //   result.minSize
+  // } m2 and a maximum price of ${priceFormatter.format(
+  //   result.maxPrice
+  // )} ${faker.lorem.sentence()}`;
+
+  // ____________________________________1_
   result.description = `${familyName} is looking for a ${
-    estateTypes.find((item) => item.id === result.estateType).name
+    estateTypes.find((item) => item.id === result.estateType)?.name || "unknown"
   } with a minimum size of ${
     result.minSize
   } m2 and a maximum price of ${priceFormatter.format(
     result.maxPrice
   )} ${faker.lorem.sentence()}`;
 
+  // ____________________________________1_
   return result;
 }
 

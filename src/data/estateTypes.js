@@ -40,3 +40,5 @@ export const estateTypes = [
     id: "9",
   },
 ];
+
+console.log("estateTypes:", estateTypes);
