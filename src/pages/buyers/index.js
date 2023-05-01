@@ -3,12 +3,17 @@ import { useRouter } from "next/router";
 import styles from "./Buyers.module.css";
 import { useState, useEffect } from "react";
 import { estateTypes } from "@/data/estateTypes";
+// _______________________________1_
+import { generateBuyerProfiles } from "@/data/buyerProfiles";
+// _______________________________1_
 
 export default function Buyers() {
   const { query } = useRouter();
   const [buyers, setBuyers] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  // _______________1_
+  const router = useRouter();
+  // _______________1_
   useEffect(() => {
     setLoading(true);
     fetch(
@@ -21,6 +26,34 @@ export default function Buyers() {
       });
   }, [query]);
 
+  // _______________________________1_
+
+  useEffect(() => {
+    if (query.price && query.size && query.estateType && query.zipCode) {
+      setBuyers(
+        generateBuyerProfiles({
+          price: parseInt(query.price),
+          size: parseInt(query.size),
+          estateType: query.estateType,
+          zipCode: parseInt(query.zipCode),
+        })
+      );
+    }
+  }, [query]);
+
+  function handleContactClick() {
+    const selectedBuyers = buyers.filter((buyer) => buyer.selected);
+    const serializedBuyers = selectedBuyers.map((buyer) =>
+      JSON.stringify(buyer)
+    );
+    const queryParams = new URLSearchParams({
+      id: serializedBuyers,
+    });
+
+    router().push(`/contact?${queryParams}`);
+  }
+
+  // _______________________________1_
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -52,7 +85,7 @@ export default function Buyers() {
                 className={styles.checkbox}
               ></input>
               <div className={styles.card_content}>
-                <p>Buyer's ID</p>
+                <p>Buyer&apos;s ID</p>
                 <p>{buyer.id}</p>
               </div>
               <div className={styles.card_content}>
@@ -85,14 +118,8 @@ export default function Buyers() {
               </div>
             </div>
           ))}
-          <button>Continue</button>
+          <button onClick={handleContactClick}>Continue</button>
         </form>
-        {/*  <div className={styles.content}>
-          <h2>Query params:</h2>
-          <pre>
-            <code>{JSON.stringify(query, null, 2)}</code>
-          </pre>
-        </div> */}
       </div>
     </>
   );
