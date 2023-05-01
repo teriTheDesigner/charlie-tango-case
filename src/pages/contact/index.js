@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import styles from "./Contact.module.css";
+import { createClient } from "@supabase/supabase-js";
 
 export default function Contact() {
   const { query } = useRouter();
