@@ -2,23 +2,27 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState, useEffect, useRef } from "react";
 import styles from "./Contact.module.css";
+import { estateTypes } from "@/data/estateTypes";
 // import { createClient } from "@supabase/supabase-js";
 export default function Contact() {
   const formEl = useRef(null);
   const { query } = useRouter();
+
   function submitted(e) {
     e.preventDefault();
     console.log({ buyers });
+
     const payload = {
       name: e.target.name.value,
       email: e.target.email.value,
       phone: e.target.phone.value,
       price: query.price,
-      estateType: query.estate_type,
+      estateType: estateTypes[query.estate_type - 1].name,
       size: query.size,
       zipCode: query.zipcode,
       buyers: buyers,
     };
+
     fetch("/api/addSellers", {
       method: "POST",
       headers: {

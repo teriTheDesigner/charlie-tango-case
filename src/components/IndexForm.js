@@ -20,7 +20,7 @@ export default function IndexForm() {
         <span className={styles.label}>Estate type</span>
         <select name="estateType" required>
           {estateTypes.map(({ name, id }) => (
-            <option key={id} value={name}>
+            <option key={id} value={id}>
               {name}
             </option>
           ))}

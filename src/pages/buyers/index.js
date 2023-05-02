@@ -50,7 +50,7 @@ export default function Buyers() {
       id: serializedBuyers,
     });
 
-    router().push(`/contact?${queryParams}`);
+    router.push(`/contact?${queryParams}`);
   }
 
   // _______________________________1_
