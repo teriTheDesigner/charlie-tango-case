@@ -17,6 +17,7 @@ export default function Buyers() {
   useEffect(
     () => {
       setLoading(true);
+      console.log("querry", query);
       fetch(
         `/api/find-buyers?price=${query.price}&size=${query.size}&zipCode=${query.zipCode}&estateType=${query.estateType}`
       )
@@ -29,6 +30,36 @@ export default function Buyers() {
     }, // [query]);
     [query]
   );
+  console.log(
+    "Query parameters:",
+    query.price,
+    query.size,
+    query.zipCode,
+    query.estateType
+  );
+  // useEffect(() => {
+  //   setLoading(true);
+  //   if (query.price && query.size && query.estateType && query.zipCode) {
+  //     fetch(
+  //       `/api/find-buyers?price=${query.price}&size=${query.size}&zipCode=${query.zipCode}&estateType=${query.estateType}`
+  //     )
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         const generatedBuyers = generateBuyerProfiles({
+  //           price: parseInt(query.price),
+  //           size: parseInt(query.size),
+  //           estateType: query.estateType,
+  //           zipCode: parseInt(query.zipCode),
+  //         });
+  //         setBuyers([...data, ...generatedBuyers]);
+  //         // console.log("Buyers from API:", buyers);
+  //         setLoading(false);
+  //       });
+  //   }
+  // }, [query]);
+
+  console.log("Buyers from API:", buyers);
+
   // _______________________________1_
 
   // useEffect(
@@ -56,7 +87,7 @@ export default function Buyers() {
       id: serializedBuyers,
     });
 
-    router().push(`/contact?${queryParams}`);
+    router.push(`/contact?${queryParams}`);
   }
 
   // _______________________________1_
@@ -69,8 +100,8 @@ export default function Buyers() {
     const estateTypeName = estateTypes.find((x) => x.id === id);
     return estateTypeName ? estateTypeName.name : null;
   }
-  console.log("estateTypes69:", estateTypes);
-  // console.log({ buyers });
+  console.log("estateTypes69:");
+  console.log(buyers);
   return (
     <>
       <Head>

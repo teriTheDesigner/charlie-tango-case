@@ -41,4 +41,4 @@ export const estateTypes = [
   },
 ];
 
-console.log("estateTypes:", estateTypes);
+// console.log("estateTypes:", estateTypes);
