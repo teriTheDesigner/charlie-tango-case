@@ -58,11 +58,32 @@ export default function Buyers() {
     return <div>Loading...</div>;
   }
 
+  // function getEstateTypeName(id) {
+  //   //goes through the object and returns the first element in the provided array
+  //   const estateTypeName = estateTypes.find((x) => x.id === id);
+  //   return estateTypeName ? estateTypeName.name : null;
+  // }
+
   function getEstateTypeName(id) {
-    //goes through the object and returns the first element in the provided array
-    const estateTypeName = estateTypes.find((x) => x.id === id);
+    console.log("Passed id:", id);
+
+    if (!id) {
+      return null;
+    }
+
+    // Convert the passed id to a string for comparison
+    const stringId = id.toString();
+
+    console.log("EstateTypes array:", estateTypes);
+
+    // Find the estate type with the matching id
+    const estateTypeName = estateTypes.find((x) => x.id === stringId);
+    console.log("Found estate type:", estateTypeName);
+
+    // Return the estate type name, or null if not found
     return estateTypeName ? estateTypeName.name : null;
   }
+
   console.log({ buyers });
   return (
     <>
