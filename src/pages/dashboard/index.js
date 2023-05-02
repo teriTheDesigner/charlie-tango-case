@@ -23,8 +23,6 @@ export default function AllData() {
     fetchData();
   }, []);
 
-  console.log(fetchedData);
-
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -58,9 +56,7 @@ export default function AllData() {
 }
 
 function fetchFromSupabase() {
-  return fetch(
-    "https://bmfekiqwrptfzlyfxxbl.supabase.co/rest/v1/Charlie_Tango_case"
-  )
+  return fetch(`/api/getData`)
     .then((response) => {
       if (!response.ok) {
         throw new Error("Failed to fetch data");
