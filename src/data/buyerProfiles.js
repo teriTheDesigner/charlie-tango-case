@@ -43,7 +43,7 @@ export function generateBuyerProfile({
     children: faker.datatype.number({ min: 0, max: 5 }),
     description: "",
     /** The type of estate the buyer is looking for. This is just the ID, so we can find the value in `estateTypes.js` */
-    estateType: estateTypes[estateType].id,
+    estateType: estateTypes[estateType] ? estateTypes[estateType].id : null,
     takeoverDate: faker.date
       .between(today, endDate)
       .toISOString()
