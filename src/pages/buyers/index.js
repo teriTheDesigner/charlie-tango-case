@@ -88,7 +88,7 @@ export default function Buyers() {
   return (
     <>
       <Head>
-        <title>Find buyer | EDC</title>
+        <title>Choose buyers | EDC</title>
       </Head>
       <div className={`wrapper`}>
         <h1 className={styles.headline}>Potential buyers</h1>

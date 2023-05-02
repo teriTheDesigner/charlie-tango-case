@@ -1,74 +1,37 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
-import styles from "./dashboard.module.css";
+import { createClient } from "@supabase/supabase-js";
 
-export default function AllData() {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
+const supabase = createClient(
+  "https://bmfekiqwrptfzlyfxxbl.supabase.co",
+  process.env.SUPABASE_KEY
+);
 
-  useEffect(() => {
-    // Fetch data from Supabase and set it to the state
-    const fetchData = () => {
-      fetchFromSupabase()
-        .then((fetchedData) => {
-          setData(fetchedData);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-          setLoading(false);
-        });
-    };
+export async function getServerSideProps() {
+  const { data: sellers, error } = await supabase
+    .from("Charlie_Tango_case")
+    .select("*");
 
-    fetchData();
-  }, []);
-
-  console.log(fetchedData);
-
-  if (loading) {
-    return <div>Loading...</div>;
+  if (error) {
+    console.error(error);
+    return { props: {} };
   }
+  console.log("sellers:", sellers);
 
+  return { props: { sellers } };
+}
+
+export default function Sellers({ sellers }) {
+  console.log("sellers prop:", sellers);
   return (
     <>
       <Head>
-        <title>All Data | Your App</title>
+        <title>Dashboard| EDC</title>
       </Head>
-      <div className={`wrapper`}>
-        <h1 className={styles.headline}>All Data</h1>
-        <div className={styles.cardContainer}>
-          {data.map((item) => (
-            <div key={item.id} className={styles.card}>
-              {/* Display data fields as card content */}
-              <div className={styles.cardContent}>
-                <p>Field 1</p>
-                <p>{item.field1}</p>
-              </div>
-              <div className={styles.cardContent}>
-                <p>Field 2</p>
-                <p>{item.field2}</p>
-              </div>
-              {/* Add more card content as needed */}
-            </div>
-          ))}
-        </div>
-      </div>
+      <ul>
+        {sellers.map((seller) => (
+          <li key={seller.id}>{seller.name}</li>
+        ))}
+      </ul>
     </>
   );
-}
-
-function fetchFromSupabase() {
-  return fetch(
-    "https://bmfekiqwrptfzlyfxxbl.supabase.co/rest/v1/Charlie_Tango_case"
-  )
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Failed to fetch data");
-      }
-      return response.json();
-    })
-    .catch((error) => {
-      console.error("Error fetching data:", error);
-      return [];
-    });
 }

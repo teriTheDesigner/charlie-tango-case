@@ -7,6 +7,7 @@ import { estateTypes } from "@/data/estateTypes";
 export default function Contact() {
   const formEl = useRef(null);
   const { query } = useRouter();
+  const router = useRouter();
 
   function submitted(e) {
     e.preventDefault();
@@ -31,7 +32,10 @@ export default function Contact() {
       body: JSON.stringify(payload),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        console.log(data);
+        router.push("/thanks");
+      });
   }
 
   console.log({ query });
@@ -51,7 +55,7 @@ export default function Contact() {
   return (
     <>
       <Head>
-        <title>Select buyer | EDC</title>
+        <title>Contact | EDC</title>
       </Head>
       <div className={`wrapper`}>
         <h1 className={styles.headline}>Potential buyers</h1>
