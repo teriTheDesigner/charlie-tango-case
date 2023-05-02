@@ -23,6 +23,8 @@ export default function AllData() {
     fetchData();
   }, []);
 
+  console.log(data);
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -36,11 +38,11 @@ export default function AllData() {
         <h1 className={styles.headline}>All Data</h1>
         <div className={styles.cardContainer}>
           {data.map((item) => (
-            <div key={item.id} className={styles.card}>
+            <div key={item.name} className={styles.card}>
               {/* Display data fields as card content */}
               <div className={styles.cardContent}>
                 <p>Field 1</p>
-                <p>{item.field1}</p>
+                <p>{item.email}</p>
               </div>
               <div className={styles.cardContent}>
                 <p>Field 2</p>
@@ -55,16 +57,26 @@ export default function AllData() {
   );
 }
 
-function fetchFromSupabase() {
-  return fetch(`/api/getData`)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Failed to fetch data");
-      }
-      return response.json();
-    })
-    .catch((error) => {
-      console.error("Error fetching data:", error);
-      return [];
+async function fetchFromSupabase() {
+  const apiUrl =
+    "https://bmfekiqwrptfzlyfxxbl.supabase.co/rest/v1/Charlie_Tango_case";
+  //   const apiKey = process.env.SUPABASE_KEY;
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: process.env.SUPABASE_KEY,
+        Prefer: "return=representation",
+      },
     });
+    if (!response.ok) {
+      throw new Error("Failed to fetch data");
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
 }

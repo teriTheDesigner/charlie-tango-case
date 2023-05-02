@@ -1,5 +1,5 @@
-// pages/api/get-data.js
-import { supabase } from "../../utils/supabaseClient";
+// pages/api/getData.js
+import { createClient } from "@supabase/supabase-js";
 
 export default async function handler(req, res) {
   try {
@@ -13,7 +13,13 @@ export default async function handler(req, res) {
 
     res.status(200).json(data);
   } catch (error) {
-    console.error("Error fetching data from Supabase:", error.message);
-    res.status(500).json({ error: "Failed to fetch data" });
+    console.error(
+      "Error fetching data from Supabase:",
+      error.message,
+      error.stack
+    );
+
+    // console.error("Error fetching data from Supabase:", error);
+    res.status(500).json({ error: "Error fetching data" });
   }
 }
