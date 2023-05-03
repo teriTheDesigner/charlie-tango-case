@@ -14,22 +14,31 @@ export default function Buyers() {
   // _______________1_
   const router = useRouter();
   // _______________1_
-  useEffect(() => {
-    setLoading(true);
-    fetch(
-      `/api/find-buyers?price=${query.price}&size=${query.size}&zipCode=${query.zipCode}&estateType=${query.estateType}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setBuyers(data);
-        setLoading(false);
-      });
-  }, [query]);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   fetch(
+  //     `/api/find-buyers?price=${query.price}&size=${query.size}&zipCode=${query.zipCode}&estateType=${query.estateType}`
+  //   )
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setBuyers(data);
+  //       setLoading(false);
+  //     });
+  // }, [query]);
 
   // _______________________________1_
-
   useEffect(() => {
     if (query.price && query.size && query.estateType && query.zipCode) {
+      setLoading(true);
+      fetch(
+        `/api/find-buyers?price=${query.price}&size=${query.size}&zipCode=${query.zipCode}&estateType=${query.estateType}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setBuyers(data);
+          setLoading(false);
+        });
+
       setBuyers(
         generateBuyerProfiles({
           price: parseInt(query.price),
@@ -40,6 +49,21 @@ export default function Buyers() {
       );
     }
   }, [query]);
+
+  // _______________________________1_
+
+  // useEffect(() => {
+  //   if (query.price && query.size && query.estateType && query.zipCode) {
+  //     setBuyers(
+  //       generateBuyerProfiles({
+  //         price: parseInt(query.price),
+  //         size: parseInt(query.size),
+  //         estateType: query.estateType,
+  //         zipCode: parseInt(query.zipCode),
+  //       })
+  //     );
+  //   }
+  // }, [query]);
 
   function handleContactClick() {
     const selectedBuyers = buyers.filter((buyer) => buyer.selected);
