@@ -5,7 +5,7 @@
   font-weight: 400;
   margin-bottom: 1rem;
   line-height: 1.2;
-  grid-column: 1/3;
+  /* grid-column: 1/3; */
 }
 
 .card {
@@ -13,10 +13,16 @@
   justify-self: center;
   flex-direction: column;
   justify-content: space-evenly;
-  border: 2px solid var(--dusty-blue);
+  /* border: 2px solid var(--dusty-blue); */
+  box-shadow: 2px 7px 9px 5px var(--dusty-blue);
   border-radius: 20px;
   padding: 2rem;
-  max-width: 25rem;
+  max-width: 80%;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
 }
 
 .card_content {
@@ -27,14 +33,54 @@
 
 .cardPageLayout {
   display: grid;
-  gap: 2rem;
+  /* gap: 2rem; */
   justify-content: center;
-  /* grid-template-columns: repeat(auto-fill minmax(300px 1fr)); */
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fill minmax(300px 1fr));
+  /* grid-template-columns: 1fr 1fr; */
 }
 
-.icon::before {
+.icon_min_area::before {
   content: url("../../assets/icon-min-area.svg");
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+.icon_EDClogo::before {
+  content: url("../../assets/edc-logo.svg");
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+.icon_boligtype::before {
+  content: url("../../assets/icon-boligtype.svg");
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+.icon_budget::before {
+  content: url("../../assets/icon-budget.svg");
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+.icon_family::before {
+  content: url("../../assets/icon-family.svg");
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+.icon_heart::before {
+  content: url("../../assets/icon-heart.svg");
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+.icon_input_close::before {
+  content: url("../../assets/icon-input-close.svg");
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+.icon_ID::before {
+  content: url("../../assets/icon-ID.svg");
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+.icon_calendar::before {
+  content: url("../../assets/icon-calendar.svg");
   vertical-align: middle;
   margin-right: 0.5rem;
 }
@@ -58,4 +104,13 @@
 }
 .content :last-child {
   margin-bottom: 0;
+}
+
+.button {
+  padding: 0.5rem;
+  background: var(--blue);
+  color: var(--white);
+}
+.button:hover {
+  background: var(--hover);
 }

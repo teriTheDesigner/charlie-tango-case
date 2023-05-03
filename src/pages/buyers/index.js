@@ -99,39 +99,41 @@ export default function Buyers() {
           <input name="zipcode" value={query.zipCode} type="hidden" />
           {buyers.map((buyer) => (
             <div key={buyer.id} className={styles.card}>
-              <input
-                type="checkbox"
-                name="id"
-                value={JSON.stringify(buyer)}
-                className={styles.checkbox}
-              ></input>
-              <div className={styles.card_content}>
-                <p>Buyer&apos;s ID</p>
-                <p>{buyer.id}</p>
+              <div>
+                <div className={styles.card_content}>
+                  <p className={styles.icon_ID}>Buyer&apos;s ID</p>
+                  <p>{buyer.id}</p>
+                </div>
+                <input
+                  type="checkbox"
+                  name="id"
+                  value={JSON.stringify(buyer)}
+                  className={styles.checkbox}
+                ></input>
               </div>
               <div className={styles.card_content}>
-                <p>Estate Type</p>
+                <p className={styles.icon_boligtype}>Estate Type</p>
                 <p>{getEstateTypeName(buyer.estateType)}</p>
               </div>
               <div className={styles.card_content}>
-                <p>Takeover Date</p>
+                <p className={styles.icon_calendar}>Takeover Date</p>
                 <p>{buyer.takeoverDate}</p>
               </div>
               <div className={styles.card_content}>
-                <p>Adults</p>
+                <p className={styles.icon_family}>Adults</p>
                 <p>{buyer.adults}</p>
               </div>
               <div className={styles.card_content}>
-                <p>Children</p>
+                <p className={styles.icon_family}>Children</p>
                 <p>{buyer.children}</p>
               </div>
               <div className={styles.card_content}>
-                <p className={styles.icon}>Min Size</p>
-                <p>{buyer.minSize}</p>
+                <p className={styles.icon_min_area}>Min Size</p>
+                <p>{buyer.minSize} m²</p>
               </div>
               <div className={styles.card_content}>
-                <p>Max Price</p>
-                <p>{buyer.maxPrice}</p>
+                <p className={styles.icon_budget}>Max Price</p>
+                <p>{buyer.maxPrice} DKK</p>
               </div>
               <div>
                 <p>Description</p>
@@ -139,7 +141,9 @@ export default function Buyers() {
               </div>
             </div>
           ))}
-          <button onClick={handleContactClick}>Continue</button>
+          <button className={styles.button} onClick={handleContactClick}>
+            Continue
+          </button>
         </form>
       </div>
     </>

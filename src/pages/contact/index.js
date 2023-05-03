@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useState, useEffect, useRef } from "react";
 import styles from "./Contact.module.css";
 import { estateTypes } from "@/data/estateTypes";
-// import { createClient } from "@supabase/supabase-js";
+
 export default function Contact() {
   const formEl = useRef(null);
   const { query } = useRouter();
