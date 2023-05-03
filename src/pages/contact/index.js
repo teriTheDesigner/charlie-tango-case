@@ -51,50 +51,95 @@ export default function Contact() {
   function deleteBuyer(id) {
     setBuyers((prev) => prev.filter((buyer) => buyer.id !== id));
   }
+
+  function getEstateTypeName(id) {
+    //goes through the object and returns the first element in the provided array
+    const estateTypeName = estateTypes.find((x) => x.id === id);
+    return estateTypeName ? estateTypeName.name : null;
+  }
   // _______________________1_
   return (
     <>
       <Head>
         <title>Contact | EDC</title>
       </Head>
-      <div className={`wrapper`}>
+      <div className={styles.layout}>
         <h1 className={styles.headline}>Potential buyers</h1>
+        <form className={styles.form} ref={formEl} onSubmit={submitted}>
+          <label className={styles.label}>
+            Name
+            <input type="text" name="name" required />
+          </label>
+
+          <label className={styles.label}>
+            Email
+            <input type="email" name="email" required />
+          </label>
+          <label className={styles.label}>
+            Phone Number
+            <input type="tel" name="phone" required />
+          </label>
+          <label className={styles.label}>
+            <input
+              type="checkbox"
+              name="offersAndInfo"
+              className={styles.checkbox_form}
+            />
+            Yes please, EDC may contact me with offers and information related
+            to the real estate market.
+          </label>
+          <button className={styles.button} type="submit">
+            Contact buyers
+          </button>
+        </form>
         <div className={styles.content}>
-          <h2>Buyers</h2>
           <ul>
             {buyers.map((buyer) => (
-              <li key={buyer.id}>
-                <button onClick={() => deleteBuyer(buyer.id)}>X</button>
-                <pre>
-                  <code>{JSON.stringify(buyer, null, 2)}</code>
-                </pre>
-              </li>
+              <div key={buyer.id} className={styles.card}>
+                <div className={styles.head}>
+                  <div className={styles.card_id}>
+                    <p className={styles.icon_ID}>ID:&nbsp;&nbsp;</p>
+                    <p>{buyer.id}</p>
+                  </div>
+                  <button onClick={() => deleteBuyer(buyer.id)}>X</button>
+                </div>
+                <div className={styles.deets}>
+                  <div>
+                    <div className={styles.card_content}>
+                      <p>Estate Type</p>
+                      <p>{getEstateTypeName(buyer.estateType)}</p>
+                    </div>
+                    <div className={styles.card_content}>
+                      <p className={styles.icon_calendar}>Takeover Date</p>
+                      <p>{buyer.takeoverDate}</p>
+                    </div>
+                    <div className={styles.card_content}>
+                      <p className={styles.icon_family}>Adults</p>
+                      <p>{buyer.adults}</p>
+                    </div>
+                  </div>
+                  <div>
+                    <div className={styles.card_content}>
+                      <p className={styles.icon_family}>Children</p>
+                      <p>{buyer.children}</p>
+                    </div>
+                    <div className={styles.card_content}>
+                      <p className={styles.icon_min_area}>Min Size</p>
+                      <p>{buyer.minSize} m²</p>
+                    </div>
+                    <div className={styles.card_content}>
+                      <p className={styles.icon_budget}>Max Price</p>
+                      <p>{buyer.maxPrice} DKK</p>
+                    </div>
+                  </div>
+                </div>
+                <div className={styles.desc}>
+                  <p>Description</p>
+                  <p>{buyer.description}</p>
+                </div>
+              </div>
             ))}
           </ul>
-          <form
-            className={styles.contactForm}
-            ref={formEl}
-            onSubmit={submitted}
-          >
-            <label>
-              Name
-              <input type="text" name="name" required />
-            </label>
-            <label>
-              Email Address
-              <input type="email" name="email" required />
-            </label>
-            <label>
-              Phone Number
-              <input type="tel" name="phone" required />
-            </label>
-            <label>
-              <input type="checkbox" name="offersAndInfo" />
-              Yes please, EDC may contact me with offers and information related
-              to the real estate market.
-            </label>
-            <button type="submit">Contact buyers</button>
-          </form>
         </div>
       </div>
     </>

@@ -1,0 +1,215 @@
+.headline {
+  font-size: 3rem;
+  font-family: var(--font-serif);
+  text-align: center;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  grid-column: 1/3;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0rem 5rem;
+}
+/* .card {
+    display: flex;
+    justify-self: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+    box-shadow: 2px 7px 9px 5px var(--dusty-blue);
+    border-radius: 20px;
+    padding: 2rem;
+    max-width: 80%;
+    transition: transform 0.3s;
+  } */
+.card {
+  /* display: grid;
+    grid-template-columns: 1fr 1fr; */
+  /* border: 2px solid var(--dusty-blue); */
+  box-shadow: 4px 4px 4px var(--dusty-aqua);
+  border-radius: 20px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  /* max-width: 15rem; */
+  transition: transform 0.3s;
+  background-color: var(--dusty-aqua-light);
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card_id {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: none;
+}
+
+.card_content {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--dusty-aqua);
+}
+
+.cardPageLayout {
+  display: grid;
+  gap: 2rem;
+  justify-content: center;
+  /* grid-template-columns: repeat(auto-fit minmax(300px 1fr)); */
+  grid-template-columns: 1fr 1fr;
+}
+
+.icon_min_area::before {
+  content: url("../../assets/icon-min-area.svg");
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+.icon_EDClogo::before {
+  content: url("../../assets/edc-logo.svg");
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+.icon_boligtype::before {
+  content: url("../../assets/icon-boligtype.svg");
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+.icon_budget::before {
+  content: url("../../assets/icon-budget.svg");
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+.icon_family::before {
+  content: url("../../assets/icon-family.svg");
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+.icon_heart::before {
+  content: url("../../assets/icon-heart.svg");
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+.icon_input_close::before {
+  content: url("../../assets/icon-input-close.svg");
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+.icon_ID::before {
+  content: url("../../assets/icon-ID.svg");
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+.icon_calendar::before {
+  content: url("../../assets/icon-calendar.svg");
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+
+.checkbox {
+  display: block;
+  align-self: flex-end;
+  width: 20px;
+  height: 20px;
+  margin-bottom: 1rem;
+}
+
+.content {
+  padding: 1rem;
+  max-height: 450px;
+  margin-bottom: 1rem;
+  overflow-y: scroll;
+  font-size: 0.8rem;
+}
+.content :first-child {
+  margin-top: 0;
+}
+.content :last-child {
+  margin-bottom: 0;
+}
+
+.button {
+  padding: 0.5rem;
+  background: var(--blue);
+  color: var(--white);
+  border-radius: 15px;
+  grid-column: 1/3;
+  width: 10rem;
+  height: 3rem;
+  justify-self: center;
+  margin-bottom: 6rem;
+}
+.button:hover {
+  background: var(--hover);
+}
+
+.head {
+  /* grid-column: 1/3; */
+  display: flex;
+  justify-content: space-between;
+}
+
+/* .desc {
+    grid-column: 1/3;
+  } */
+
+.deets {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 1.75rem;
+}
+
+.deets div {
+  align-content: center;
+
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.form {
+  background-color: var(--dusty-blue-lighter);
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 450px;
+}
+
+.label {
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+}
+
+.button {
+  margin-top: 1rem;
+  max-width: fit-content;
+}
+
+.form select {
+  padding: 0.5rem;
+}
+
+.form input {
+  padding: 0.5rem;
+  max-width: 50%;
+}
+
+.button {
+  padding: 0.5rem;
+  background: var(--blue);
+  color: var(--white);
+}
+.button:hover {
+  background: var(--hover);
+}
+
+.checkbox_form {
+  align-self: flex-start;
+}
