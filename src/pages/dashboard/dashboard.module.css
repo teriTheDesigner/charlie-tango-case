@@ -16,7 +16,12 @@
   background-color: var(--dusty-aqua-light);
   border-radius: 15px;
   box-shadow: 4px 4px 4px var(--dusty-aqua);
+  transition: transform 0.3s;
 }
+
+/* .sellerCard:hover {
+  transform: scale(1.05);
+} */
 
 .sellerCard h2 {
   grid-column: 1/3;

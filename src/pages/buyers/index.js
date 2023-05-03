@@ -99,9 +99,9 @@ export default function Buyers() {
           <input name="zipcode" value={query.zipCode} type="hidden" />
           {buyers.map((buyer) => (
             <div key={buyer.id} className={styles.card}>
-              <div>
-                <div className={styles.card_content}>
-                  <p className={styles.icon_ID}>Buyer&apos;s ID</p>
+              <div className={styles.head}>
+                <div className={styles.card_id}>
+                  <p className={styles.icon_ID}>ID:&nbsp;&nbsp;</p>
                   <p>{buyer.id}</p>
                 </div>
                 <input
@@ -111,31 +111,37 @@ export default function Buyers() {
                   className={styles.checkbox}
                 ></input>
               </div>
-              <div className={styles.card_content}>
-                <p className={styles.icon_boligtype}>Estate Type</p>
-                <p>{getEstateTypeName(buyer.estateType)}</p>
+              <div className={styles.deets}>
+                <div>
+                  <div className={styles.card_content}>
+                    <p>Estate Type</p>
+                    <p>{getEstateTypeName(buyer.estateType)}</p>
+                  </div>
+                  <div className={styles.card_content}>
+                    <p className={styles.icon_calendar}>Takeover Date</p>
+                    <p>{buyer.takeoverDate}</p>
+                  </div>
+                  <div className={styles.card_content}>
+                    <p className={styles.icon_family}>Adults</p>
+                    <p>{buyer.adults}</p>
+                  </div>
+                </div>
+                <div>
+                  <div className={styles.card_content}>
+                    <p className={styles.icon_family}>Children</p>
+                    <p>{buyer.children}</p>
+                  </div>
+                  <div className={styles.card_content}>
+                    <p className={styles.icon_min_area}>Min Size</p>
+                    <p>{buyer.minSize} m²</p>
+                  </div>
+                  <div className={styles.card_content}>
+                    <p className={styles.icon_budget}>Max Price</p>
+                    <p>{buyer.maxPrice} DKK</p>
+                  </div>
+                </div>
               </div>
-              <div className={styles.card_content}>
-                <p className={styles.icon_calendar}>Takeover Date</p>
-                <p>{buyer.takeoverDate}</p>
-              </div>
-              <div className={styles.card_content}>
-                <p className={styles.icon_family}>Adults</p>
-                <p>{buyer.adults}</p>
-              </div>
-              <div className={styles.card_content}>
-                <p className={styles.icon_family}>Children</p>
-                <p>{buyer.children}</p>
-              </div>
-              <div className={styles.card_content}>
-                <p className={styles.icon_min_area}>Min Size</p>
-                <p>{buyer.minSize} m²</p>
-              </div>
-              <div className={styles.card_content}>
-                <p className={styles.icon_budget}>Max Price</p>
-                <p>{buyer.maxPrice} DKK</p>
-              </div>
-              <div>
+              <div className={styles.desc}>
                 <p>Description</p>
                 <p>{buyer.description}</p>
               </div>
