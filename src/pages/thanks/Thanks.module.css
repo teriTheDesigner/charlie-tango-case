@@ -1,0 +1,25 @@
+.div {
+  background-color: aliceblue;
+  max-width: 50vw;
+  padding: 3rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.img {
+  content: url("../../assets/icon-heart.svg");
+  max-width: 3rem;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.div button {
+  align-self: center;
+}
